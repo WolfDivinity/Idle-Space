@@ -45,5 +45,25 @@ if (typeof savegame.rocks !== "undefined") rocks = savegame.rocks;
 if (typeof savegame.miners !== "undefined") miners = savegame.miners;
 if (typeof savegame.money !== "undefined") money = savegame.money;
 }
-
+document.addEventListener("DOMContentLoaded", theDomHasLoaded, false);
+window.addEventListener("load", pageFullyLoaded, false);
+ 
+function theDomHasLoaded(e) {
+    
+	
+    window.alert("Dom is loaded")
+}
+ 
+function pageFullyLoaded(e) {
+   Load();
+   updateNumbers();
+    window.alert("page is loaded")
+}
+function updateNumbers(){
+document.getElementById('miners').innerHTML = miners;
+	document.getElementById("rocks").innerHTML = rocks;
+	document.getElementById('money').innerHTML = money;
+	}
+	
+	
 window.setInterval(function(){RockClick(miners);},1000);
