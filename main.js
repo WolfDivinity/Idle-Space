@@ -21,7 +21,8 @@ var priceOfRocks = 10;
 if(rocks > 0){
 var amount = rocks * priceOfRocks;
 rocks =0;
-money = money+ amount;
+money = money + amount;
+toggleMoneyDisplay();
 document.getElementById('money').innerHTML = money;
 document.getElementById('rocks').innerHTML = rocks;
     }
@@ -29,7 +30,12 @@ document.getElementById('rocks').innerHTML = rocks;
 	window.alert("No rocks to sell");
 	}
 }
+function toggleMoneyDisplay(){
+if(money>0){
+document.getElementById('totalDollars').style.display = "block";
+}else{document.getElementById('total').style.display = "none";}
 
+}
 function Save(){
 var save = {
 rocks: rocks,
@@ -45,19 +51,16 @@ if (typeof savegame.rocks !== "undefined") rocks = savegame.rocks;
 if (typeof savegame.miners !== "undefined") miners = savegame.miners;
 if (typeof savegame.money !== "undefined") money = savegame.money;
 }
-document.addEventListener("DOMContentLoaded", theDomHasLoaded, false);
 window.addEventListener("load", pageFullyLoaded, false);
- 
-function theDomHasLoaded(e) {
+ function Reset(){
+ localStorage.removeItem("save");
+ }
     
-	
-    window.alert("Dom is loaded")
-}
  
 function pageFullyLoaded(e) {
    Load();
    updateNumbers();
-    window.alert("page is loaded")
+  
 }
 function updateNumbers(){
 document.getElementById('miners').innerHTML = miners;
