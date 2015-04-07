@@ -1,6 +1,49 @@
-.button.small{
-width: 100px; height: 100px;
+.button{
+    color: red;
+	background-color: black;
+	width: 100px; height: 50px;
+}
+#tierTitle{
+position: fixed;
+left:25%;
+top: auto;
+}
+#tierAmount{
+position: fixed;
+right: 25%;
+top: auto;
+}
+h1{
+color: red;
+font-size: 75px;
+}
+#sidebar{
+position: fixed;
+bottom: 10%;
+}
+.center{
+position: absolute;
+	transition: .5s;
+	top: 50%;
+	left: 50%;
+}
+.test{
+margin-left: 45%;
+margin-right: auto;
+
+
+}
+.left{
+margin-left: 1%;
+margin-right: auto;
+}
+.right{
+margin-left: 50%;
+margin-right: auto;
 }
 #totalDollars{
-display: none;
+	display: none;
+}
+body{
+background-color: #00CC99;
 }

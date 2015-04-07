@@ -1,9 +1,9 @@
-var rocks =0;
+var tier1 =0;
 var miners =0;
+function addtier1(number){
 var money =0;
-function RockClick(number){
-rocks = rocks + number;
-document.getElementById("rocks").innerHTML = rocks;
+tier1 = tier1 + number;
+document.getElementById("tier1").innerHTML = tier1;
 }
 function HireMiner(){
     var minerCost = Math.floor(10 * Math.pow(1.1,miners));     //works out the cost of this cursor
@@ -34,7 +34,6 @@ function toggleMoneyDisplay(){
 if(money>0){
 document.getElementById('totalDollars').style.display = "block";
 }else{document.getElementById('total').style.display = "none";}
-
 }
 function Save(){
 var save = {
@@ -43,7 +42,7 @@ miners: miners,
 money: money
 }
 localStorage.setItem("save",JSON.stringify(save));
-window.alert("Saved!");
+//window.alert("Saved!");
 }
 function Load(){
 var savegame = JSON.parse(localStorage.getItem("save"));
@@ -51,22 +50,24 @@ if (typeof savegame.rocks !== "undefined") rocks = savegame.rocks;
 if (typeof savegame.miners !== "undefined") miners = savegame.miners;
 if (typeof savegame.money !== "undefined") money = savegame.money;
 }
-window.addEventListener("load", pageFullyLoaded, false);
- function Reset(){
+function Reset(){
  localStorage.removeItem("save");
  }
-    
- 
 function pageFullyLoaded(e) {
    Load();
+   toggleMoneyDisplay();
    updateNumbers();
   
 }
 function updateNumbers(){
 document.getElementById('miners').innerHTML = miners;
-	document.getElementById("rocks").innerHTML = rocks;
+	document.getElementById("tier1").innerHTML = tier1;
 	document.getElementById('money').innerHTML = money;
 	}
 	
-	
-window.setInterval(function(){RockClick(miners);},1000);
+window.addEventListener("load", pageFullyLoaded, false);
+window.setInterval(function(){
+RockClick(miners);
+updateNumbers();
+Save();
+},1000);
