@@ -1,73 +1,53 @@
 var tier1 =0;
-var miners =0;
-function addtier1(number){
-var money =0;
+var workers =1;
+var money=0;
+function addtier(number){
 tier1 = tier1 + number;
 document.getElementById("tier1").innerHTML = tier1;
 }
-function HireMiner(){
-    var minerCost = Math.floor(10 * Math.pow(1.1,miners));     //works out the cost of this cursor
-    if(rocks >= minerCost){                                   //checks that the player can afford the cursor
-        miners = miners + 1;                                   //increases number of cursors
-    	rocks = rocks - minerCost;                          //removes the cookies spent
-        document.getElementById('miners').innerHTML = miners;  //updates the number of cursors for the user
-        document.getElementById('rocks').innerHTML = rocks;  //updates the number of cookies for the user
+function HireWorker(){
+    var workerCost = Math.floor(10 * Math.pow(1.1,workers));     //works out the cost of this cursor
+    if(tier1 >= workerCost){                                   //checks that the player can afford the cursor
+        workers = workers + 1;                                   //increases number of cursors
+    	tier1 = tier1 - workerCost;                          //removes the cookies spent
+        document.getElementById('workers').innerHTML = workers;  //updates the number of cursors for the user
+        document.getElementById('tier1').innerHTML = tier1;  //updates the number of cookies for the user
     };
-    var nextCost = Math.floor(10 * Math.pow(1.1,miners));       //works out the cost of the next cursor
-    document.getElementById('minerscost').innerHTML = nextCost;  //updates the cursor cost for the user
-};
-function SellAllRocks(){
-var priceOfRocks = 10;
-if(rocks > 0){
-var amount = rocks * priceOfRocks;
-rocks =0;
-money = money + amount;
-toggleMoneyDisplay();
-document.getElementById('money').innerHTML = money;
-document.getElementById('rocks').innerHTML = rocks;
-    }
-	else{
-	window.alert("No rocks to sell");
-	}
+    var nextCost = Math.floor(10 * Math.pow(1.1,workers));       //works out the cost of the next cursor
+    document.getElementById('workercost').innerHTML = nextCost;  //updates the cursor cost for the user
 }
-function toggleMoneyDisplay(){
-if(money>0){
-document.getElementById('totalDollars').style.display = "block";
-}else{document.getElementById('total').style.display = "none";}
-}
+
 function Save(){
 var save = {
-rocks: rocks,
-miners: miners,
+tier1: tier1,
+workers: workers,
 money: money
 }
 localStorage.setItem("save",JSON.stringify(save));
-//window.alert("Saved!");
+window.alert("Saved!");
 }
 function Load(){
 var savegame = JSON.parse(localStorage.getItem("save"));
-if (typeof savegame.rocks !== "undefined") rocks = savegame.rocks;
-if (typeof savegame.miners !== "undefined") miners = savegame.miners;
+if (typeof savegame.tier1 !== "undefined") tier1 = savegame.tier1;
+if (typeof savegame.workers !== "undefined") workers = savegame.workers;
 if (typeof savegame.money !== "undefined") money = savegame.money;
 }
 function Reset(){
  localStorage.removeItem("save");
  }
 function pageFullyLoaded(e) {
-   Load();
-   toggleMoneyDisplay();
-   updateNumbers();
-  
+   Load(); 
+window.alert("page fully loaded");   
 }
 function updateNumbers(){
-document.getElementById('miners').innerHTML = miners;
+    document.getElementById('workers').innerHTML = workers;
 	document.getElementById("tier1").innerHTML = tier1;
 	document.getElementById('money').innerHTML = money;
 	}
 	
 window.addEventListener("load", pageFullyLoaded, false);
 window.setInterval(function(){
-RockClick(miners);
+addtier(workers);
 updateNumbers();
 Save();
 },1000);
